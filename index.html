@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Learning Axis — Editor</title>
+  <style>
+    :root {
+      --bg:#111;
+      --card:#1a1a1a;
+      --header:#222;
+      --btn:#ff5555;
+      --btn-hover:#ff7777;
+      --accent:#00c2ff;
+      --text:#eee;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+    body{
+      background:linear-gradient(135deg,#111,#222);
+      color:var(--text);
+      height:100vh;
+      overflow:hidden;
+    }
+    .app{
+      display:flex;
+      flex-direction:column;
+      width:100%;
+      height:100vh;
+      background:var(--card);
+    }
+    header{
+      display:flex;
+      align-items:center;
+      padding:6px 12px;
+      background:var(--header);
+    }
+    .window-btns{
+      display:flex;
+      gap:6px;
+      margin-right:10px;
+    }
+    .window-btns span{
+      width:12px;height:12px;border-radius:50%;display:inline-block;
+    }
+    .red{background:#ff5f56;}
+    .yellow{background:#ffbd2e;}
+    .green{background:#27c93f;}
+    header h1{
+      font-size:14px;
+      font-weight:600;
+      color:var(--text);
+    }
+    .preview-wrap{
+      height:40%;
+      border-bottom:1px solid #333;
+      display:flex;
+      flex-direction:column;
+    }
+    .preview-toolbar{
+      background:#111;
+      padding:4px;
+      display:flex;
+      justify-content:flex-end;
+      gap:6px;
+    }
+    .preview-toolbar button{
+      background:var(--btn);
+      border:none;
+      color:#fff;
+      padding:4px 10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .preview-toolbar button:hover{background:var(--btn-hover);}
+    #preview{
+      flex:1;
+      background:#fff;
+      width:100%;
+      border:none;
+    }
+    .editor-area{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+    .tabs{
+      display:flex;
+      background:#111;
+    }
+    .tabs button{
+      flex:1;
+      background:#111;
+      border:none;
+      color:#aaa;
+      padding:8px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .tabs button.active{background:var(--card);color:var(--accent);}
+    .editor{
+      flex:1;
+      display:none;
+    }
+    .editor.active{display:block;}
+    .actions{
+      display:flex;
+      gap:6px;
+      padding:6px;
+      background:#111;
+    }
+    .actions button{
+      flex:1;
+      background:var(--btn);
+      border:none;
+      color:#fff;
+      padding:10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .actions button:hover{background:var(--btn-hover);}
+    footer{
+      background:#111;
+      padding:4px;
+      text-align:center;
+      font-size:11px;
+      color:#666;
+    }
+    /* PC modo ventana */
+    @media(min-width:900px){
+      body{display:flex;justify-content:center;align-items:center;}
+      .app{
+        max-width:920px;
+        max-height:90vh;
+        border-radius:12px;
+        overflow:hidden;
+      }
+    }
+
+    /* Ajuste de cursor en ACE */
+    .ace_editor {
+      font-family: monospace !important;
+      line-height: 20px !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="window-btns">
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </div>
+      <h1>Learning Axis — Editor</h1>
+    </header>
+    <div class="preview-wrap">
+      <div class="preview-toolbar">
+        <button onclick="openPreview()">Abrir</button>
+        <button onclick="expandPreview()">Expandir</button>
+      </div>
+      <iframe id="preview"></iframe>
+    </div>
+    <div class="editor-area">
+      <div class="tabs">
+        <button class="active" onclick="showTab('html')">HTML</button>
+        <button onclick="showTab('css')">CSS</button>
+        <button onclick="showTab('js')">JavaScript</button>
+      </div>
+      <div id="html" class="editor active"></div>
+      <div id="css" class="editor"></div>
+      <div id="js" class="editor"></div>
+      <div class="actions">
+        <button onclick="runCode()">Run</button>
+        <button onclick="downloadCode()">Descargar</button>
+      </div>
+    </div>
+    <footer>Edita en las pestañas y presiona Run o Ctrl+Enter</footer>
+  </div>
+
+  <!-- ACE Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.3/ace.js"></script>
+  <script>
+    const htmlEditor = ace.edit("html",{mode:"ace/mode/html",theme:"ace/theme/monokai"});
+    const cssEditor = ace.edit("css",{mode:"ace/mode/css",theme:"ace/theme/monokai"});
+    const jsEditor = ace.edit("js",{mode:"ace/mode/javascript",theme:"ace/theme/monokai"});
+
+    // Ajustes para alinear bien el cursor
+    [htmlEditor, cssEditor, jsEditor].forEach(ed=>{
+      ed.setOption("fontSize", "14px");
+      ed.setOption("fontFamily", "monospace");
+      ed.setOption("cursorStyle", "ace");
+      ed.setOption("highlightActiveLine", true);
+      ed.setOption("showPrintMargin", false);
+      ed.renderer.setOption("lineHeight", 20);
+    });
+
+    function showTab(id){
+      document.querySelectorAll('.editor').forEach(e=>e.classList.remove('active'));
+      document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function runCode(){
+      const code = `
+        <style>${cssEditor.getValue()}</style>
+        ${htmlEditor.getValue()}
+        <script>${jsEditor.getValue()}<\/script>
+      `;
+      const preview = document.getElementById("preview");
+      preview.srcdoc = code;
+    }
+
+    function downloadCode(){
+      const code = `
+        <style>${cssEditor.getValue()}</style>
+        ${htmlEditor.getValue()}
+        <script>${jsEditor.getValue()}<\/script>
+      `;
+      const blob = new Blob([code],{type:"text/html"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "preview.html";
+      a.click();
+    }
+
+    function openPreview(){
+      const code = `
+        <style>${cssEditor.getValue()}</style>
+        ${htmlEditor.getValue()}
+        <script>${jsEditor.getValue()}<\/script>
+      `;
+      const w = window.open();
+      w.document.open();
+      w.document.write(code);
+      w.document.close();
+    }
+
+    function expandPreview(){
+      const preview = document.getElementById("preview");
+      if(preview.style.height==="100%"){
+        preview.style.height="auto";
+        document.querySelector(".preview-wrap").style.height="40%";
+        document.querySelector(".editor-area").style.display="flex";
+      }else{
+        preview.style.height="100%";
+        document.querySelector(".preview-wrap").style.height="100%";
+        document.querySelector(".editor-area").style.display="none";
+      }
+    }
+
+    [htmlEditor, cssEditor, jsEditor].forEach(editor=>{
+      editor.session.on("change", ()=>{
+        runCode();
+      });
+    });
+
+    // Ejecutar al cargar
+    runCode();
+  </script>
+</body>
+</html>
