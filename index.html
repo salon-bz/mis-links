@@ -1,305 +1,301 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contraseña — AIMKILL01 (Neon RGB)</title>
-  <style>
-    :root{
-      --bg-dark:#05030a;
-      --glass: rgba(255,255,255,0.04);
-      --neon-1: #00f0ff;
-      --neon-2: #9b5bff;
-      --neon-3: #ff3d9b;
-      --neon-4: #00ff95;
-      --text:#e7f0ff;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(155,91,255,0.06), transparent 8%),
-                  radial-gradient(900px 400px at 90% 90%, rgba(0,240,255,0.05), transparent 8%),
-                  var(--bg-dark);
-      color:var(--text);
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-    }
+<!doctype html>  
+<html lang="es">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  
+  <title>Contraseña — AIMKILL01 (Neon RGB)</title>  
+  <style>  
+    :root{  
+      --bg-dark:#05030a;  
+      --glass: rgba(255,255,255,0.04);  
+      --neon-1: #00f0ff;  
+      --neon-2: #9b5bff;  
+      --neon-3: #ff3d9b;  
+      --neon-4: #00ff95;  
+      --text:#e7f0ff;  
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;  
+    }  
+    *{box-sizing:border-box;margin:0;padding:0}  
+    html,body{height:100%}  
+    body{  
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;  
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(155,91,255,0.06), transparent 8%),  
+                  radial-gradient(900px 400px at 90% 90%, rgba(0,240,255,0.05), transparent 8%),  
+                  var(--bg-dark);  
+      color:var(--text);  
+      overflow:hidden;  
+      display:flex;  
+      align-items:center;  
+      justify-content:center;  
+      padding:32px;  
+    }  
+  
+    .aurora{  
+      position:fixed;inset:-20% -20% -20% -20%;z-index:0;pointer-events:none;  
+      background:  
+        linear-gradient(120deg, rgba(155,91,255,0.06), transparent 20%),  
+        linear-gradient(60deg, rgba(0,240,255,0.04), transparent 30%),  
+        linear-gradient(200deg, rgba(255,61,155,0.03), transparent 28%);  
+      filter:blur(40px) saturate(140%);  
+      animation: drift 18s linear infinite;  
+    }  
+    @keyframes drift{  
+      0%{transform:translateX(0) translateY(0) rotate(0deg)}  
+      50%{transform:translateX(6%) translateY(-4%) rotate(1deg)}  
+      100%{transform:translateX(0) translateY(0) rotate(0deg)}  
+    }  
+  
+    .noise{  
+      position:Fixed;inset:0;z-index:1;pointer-events:none;opacity:0.06;  
+      background-image:  
+        linear-gradient(transparent 1px, rgba(255,255,255,0.01) 1px),  
+        linear-gradient(90deg, transparent 1px, rgba(255,255,255,0.01) 1px);  
+      background-size: 24px 24px, 24px 24px;  
+      mix-blend-mode:overlay;  
+    }  
+  
+    .center-wrap{position:relative;z-index:2;width:min(920px,96%);margin:auto}  
+    .neon-card{  
+      width:100%;  
+      border-radius:18px;  
+      padding:36px;  
+      display:flex;  
+      gap:26px;  
+      align-items:center;  
+      justify-content:space-between;  
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));  
+      border: 1px solid rgba(255,255,255,0.03);  
+      box-shadow:  
+        0 10px 40px rgba(5,8,20,0.75),  
+        0 0 40px rgba(155,91,255,0.06);  
+      position:relative;  
+      overflow:hidden;  
+    }  
+  
+    .neon-card::before{  
+      content:"";  
+      position:absolute;inset:-2px;  
+      background:linear-gradient(90deg, rgba(0,240,255,0.12), rgba(155,91,255,0.12), rgba(255,61,155,0.12));  
+      filter:blur(30px);  
+      opacity:0.9;  
+      mix-blend-mode:screen;  
+      transform:translateY(-6px);  
+      pointer-events:none;  
+    }  
+  
+    .middle{  
+      width:420px;max-width:46%;min-width:260px;border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.02));  
+      border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px) saturate(120%);  
+      box-shadow: 0 18px 60px rgba(7,10,30,0.7), 0 0 80px rgba(107,91,255,0.06);  
+      position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;  
+      margin:0 auto;  
+    }  
+  
+    .big-label{font-size:12px;color:rgba(235,245,255,0.8);text-transform:uppercase;letter-spacing:1px}  
+    .big-pass{  
+      font-family:var(--mono);  
+      font-weight:900;  
+      font-size:34px;  
+      letter-spacing:2px;  
+      color:var(--text);  
+      padding:8px 14px;  
+      border-radius:10px;  
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));  
+      border:1px solid rgba(255,255,255,0.03);  
+      text-shadow: 0 6px 28px rgba(0,0,0,0.6);  
+      box-shadow: 0 8px 28px rgba(107,91,255,0.06), 0 0 22px rgba(0,240,255,0.03) inset;  
+    }  
+  
+    .neon-underline{  
+      width:70%;height:6px;border-radius:6px;margin-top:6px;  
+      background:linear-gradient(90deg,var(--neon-1),var(--neon-2),var(--neon-3));  
+      filter:drop-shadow(0 6px 18px rgba(155,91,255,0.12));  
+      animation: pulse 2.3s infinite ease-in-out;  
+      opacity:0.95;  
+    }  
+    @keyframes pulse{  
+      0%{transform:translateX(-2%) scaleX(0.98);opacity:0.9}  
+      50%{transform:translateX(2%) scaleX(1.02);opacity:1}  
+      100%{transform:translateX(-2%) scaleX(0.98);opacity:0.9}  
+    }  
+  
+    .controls{display:flex;gap:10px;margin-top:6px}  
+    .btn{  
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer;border:none;  
+      background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#051229;font-size:14px;  
+      box-shadow:0 12px 36px rgba(155,91,255,0.16), 0 4px 12px rgba(0,240,255,0.06);  
+      transition:transform .12s ease,box-shadow .12s ease;  
+    }  
+    .btn:active{transform:translateY(1px)}  
+    .btn-ghost{  
+      padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:700;  
+      box-shadow:0 6px 18px rgba(0,0,0,0.5);  
+    }  
+  
+    .copied-badge{  
+      display:inline-block;padding:8px 10px;border-radius:999px;background:linear-gradient(90deg,var(--neon-4),#8effd3);color:#05231a;font-weight:800;font-size:13px;  
+      box-shadow:0 8px 28px rgba(0,255,149,0.08);  
+    }  
+  
+    @media (max-width:880px){  
+      .neon-card{flex-direction:column;align-items:stretch;padding:22px;gap:18px}  
+      .middle{width:100%;max-width:none}  
+      .big-pass{font-size:28px}  
+    }  
+  
+    .btn:focus, .btn-ghost:focus { outline:2px solid rgba(255,255,255,0.06); outline-offset:4px; }  
+  
+    /* ---------- COPYRIGHT ---------- */  
+    .mini-copyright{  
+      position:fixed;  
+      bottom:10px;  
+      left:50%;  
+      transform:translateX(-50%);  
+      display:inline-flex;  
+      gap:10px;  
+      font-weight:700;  
+      font-size:14px;  
+      letter-spacing:0.6px;  
+      z-index:3;  
+    }  
+    .mini-copyright .years{  
+      color:#ffffff;  
+      opacity:0.9;  
+    }  
+    .mini-copyright .luck{  
+      color:#ff1f4b;  
+      text-shadow:  
+        0 0 6px rgba(255,31,75,0.9),  
+        0 0 18px rgba(255,31,75,0.6),  
+        0 6px 24px rgba(255,31,75,0.12);  
+      animation: neonPulse 2.4s infinite ease-in-out;  
+    }  
+    @keyframes neonPulse {  
+      0%   { filter: brightness(1); }  
+      50%  { filter: brightness(1.2); }  
+      100% { filter: brightness(1); }  
+    }  
+  </style>  
+</head>  
+<body>  
+  <div class="aurora" aria-hidden="true"></div>  
+  <div class="noise" aria-hidden="true"></div>  
+  
+  <div class="center-wrap" role="main">  
+    <div class="neon-card" role="region" aria-label="Panel principal">  
+      <div style="flex:1; min-width:180px; padding-right:8px;"></div>  
+  
+      <!-- Middle / box centrado -->  
+      <div class="middle" aria-live="polite">  
+        <div class="big-label" style="opacity:0.85">Contraseña</div>  
+        <div class="big-pass" id="bigPass">AIMKILL01</div>  
+  
+        <div class="neon-underline" aria-hidden="true"></div>  
+  
+        <div class="controls" role="group" aria-label="Controles de contraseña">  
+          <button class="btn" id="copyBtn" data-pass="AIMKILL01" title="Copiar AIMKILL01">📋 Copiar</button>  
+          <button class="btn-ghost" id="revealBtn" title="Ocultar/Mostrar contraseña">🔒 Ocultar</button>  
+          <!-- Botón reemplazado: abrirá el enlace de MediaFire en nueva pestaña -->  
+          <button class="btn" id="downloadBtn" title="Descargar mod menu">⬇️ Descargar mod menu</button>  
+        </div>  
+  
+        <div style="margin-top:8px">  
+          <span id="status" class="copied-badge" style="display:none">Copiado</span>  
+          <span id="statusFallback" style="color:rgba(231,240,255,0.8);font-size:13px">Estado: listo</span>  
+        </div>  
+      </div>  
+  
+      <div style="flex:1; min-width:180px; padding-left:8px;"></div>  
+    </div>  
+  </div>  
+  
+  <!-- COPYRIGHT -->  
+  <div class="mini-copyright">  
+    <span class="years">(2024 - 2025)</span>  
+    <span class="luck">(LUCK X!T)</span>  
+  </div>  
+  
+  <script>  
+    async function copyText(text) {  
+      try {  
+        if (navigator.clipboard && navigator.clipboard.writeText) {  
+          await navigator.clipboard.writeText(text);  
+          return true;  
+        } else {  
+          const ta = document.createElement('textarea');  
+          ta.value = text;  
+          ta.style.position = 'fixed';  
+          ta.style.left = '-9999px';  
+          document.body.appendChild(ta);  
+          ta.select();  
+          const ok = document.execCommand('copy');  
+          ta.remove();  
+          return ok;  
+        }  
+      } catch (err) {  
+        console.error('copy failed', err);  
+        return false;  
+      }  
+    }  
+  
+    function showCopied() {  
+      const badge = document.getElementById('status');  
+      const fallback = document.getElementById('statusFallback');  
+      badge.style.display = 'inline-block';  
+      fallback.style.display = 'none';  
+      setTimeout(()=> {  
+        badge.style.display = 'none';  
+        fallback.style.display = 'inline';  
+      }, 1600);  
+    }  
+  
+    function showError(msg) {  
+      const fallback = document.getElementById('statusFallback');  
+      fallback.textContent = 'Error: ' + msg;  
+      setTimeout(()=> { fallback.textContent = 'Estado: listo'; }, 1800);  
+    }  
+  
+    const copyBtn = document.getElementById('copyBtn');  
+    const revealBtn = document.getElementById('revealBtn');  
+    const bigPass = document.getElementById('bigPass');  
+    const downloadBtn = document.getElementById('downloadBtn');  
 
-    .aurora{
-      position:fixed;inset:-20% -20% -20% -20%;z-index:0;pointer-events:none;
-      background:
-        linear-gradient(120deg, rgba(155,91,255,0.06), transparent 20%),
-        linear-gradient(60deg, rgba(0,240,255,0.04), transparent 30%),
-        linear-gradient(200deg, rgba(255,61,155,0.03), transparent 28%);
-      filter:blur(40px) saturate(140%);
-      animation: drift 18s linear infinite;
-    }
-    @keyframes drift{
-      0%{transform:translateX(0) translateY(0) rotate(0deg)}
-      50%{transform:translateX(6%) translateY(-4%) rotate(1deg)}
-      100%{transform:translateX(0) translateY(0) rotate(0deg)}
-    }
+    copyBtn.addEventListener('click', async function() {  
+      const text = this.getAttribute('data-pass') || bigPass.textContent;  
+      const ok = await copyText(text);  
+      if (ok) {  
+        showCopied();  
+      } else {  
+        showError('No se pudo copiar');  
+      }  
+    });  
+  
+    let revealed = true;  
+    revealBtn.addEventListener('click', () => {  
+      revealed = !revealed;  
+      if (revealed) {  
+        bigPass.textContent = 'AIMKILL01';  
+        revealBtn.textContent = '🔒 Ocultar';  
+      } else {  
+        bigPass.textContent = '********';  
+        revealBtn.textContent = '👁 Mostrar';  
+      }  
+    });  
+  
+    // Enlace de descarga (MediaFire) solicitado por el usuario:
+    const mediafireLink = 'https://www.mediafire.com/file/ydqjb2nkm6hm2tu/MOD_AIMKILL_BY%25C2%25A9%25EF%25B8%258FCHICO_H4X.zip/file';
 
-    .noise{
-      position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.06;
-      background-image:
-        linear-gradient(transparent 1px, rgba(255,255,255,0.01) 1px),
-        linear-gradient(90deg, transparent 1px, rgba(255,255,255,0.01) 1px);
-      background-size: 24px 24px, 24px 24px;
-      mix-blend-mode:overlay;
-    }
-
-    .center-wrap{position:relative;z-index:2;width:min(920px,96%);margin:auto}
-    .neon-card{
-      width:100%;
-      border-radius:18px;
-      padding:36px;
-      display:flex;
-      gap:26px;
-      align-items:center;
-      justify-content:space-between;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-      border: 1px solid rgba(255,255,255,0.03);
-      box-shadow:
-        0 10px 40px rgba(5,8,20,0.75),
-        0 0 40px rgba(155,91,255,0.06);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .neon-card::before{
-      content:"";
-      position:absolute;inset:-2px;
-      background:linear-gradient(90deg, rgba(0,240,255,0.12), rgba(155,91,255,0.12), rgba(255,61,155,0.12));
-      filter:blur(30px);
-      opacity:0.9;
-      mix-blend-mode:screen;
-      transform:translateY(-6px);
-      pointer-events:none;
-    }
-
-    .middle{
-      width:420px;max-width:46%;min-width:260px;border-radius:14px;padding:22px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.02));
-      border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px) saturate(120%);
-      box-shadow: 0 18px 60px rgba(7,10,30,0.7), 0 0 80px rgba(107,91,255,0.06);
-      position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;
-      margin:0 auto;
-    }
-
-    .big-label{font-size:12px;color:rgba(235,245,255,0.8);text-transform:uppercase;letter-spacing:1px}
-    .big-pass{
-      font-family:var(--mono);
-      font-weight:900;
-      font-size:34px;
-      letter-spacing:2px;
-      color:var(--text);
-      padding:8px 14px;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));
-      border:1px solid rgba(255,255,255,0.03);
-      text-shadow: 0 6px 28px rgba(0,0,0,0.6);
-      box-shadow: 0 8px 28px rgba(107,91,255,0.06), 0 0 22px rgba(0,240,255,0.03) inset;
-    }
-
-    .neon-underline{
-      width:70%;height:6px;border-radius:6px;margin-top:6px;
-      background:linear-gradient(90deg,var(--neon-1),var(--neon-2),var(--neon-3));
-      filter:drop-shadow(0 6px 18px rgba(155,91,255,0.12));
-      animation: pulse 2.3s infinite ease-in-out;
-      opacity:0.95;
-    }
-    @keyframes pulse{
-      0%{transform:translateX(-2%) scaleX(0.98);opacity:0.9}
-      50%{transform:translateX(2%) scaleX(1.02);opacity:1}
-      100%{transform:translateX(-2%) scaleX(0.98);opacity:0.9}
-    }
-
-    .controls{display:flex;gap:10px;margin-top:6px}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer;border:none;
-      background:linear-gradient(90deg,var(--neon-2),var(--neon-1));color:#051229;font-size:14px;
-      box-shadow:0 12px 36px rgba(155,91,255,0.16), 0 4px 12px rgba(0,240,255,0.06);
-      transition:transform .12s ease,box-shadow .12s ease;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn-ghost{
-      padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:700;
-      box-shadow:0 6px 18px rgba(0,0,0,0.5);
-    }
-
-    .copied-badge{
-      display:inline-block;padding:8px 10px;border-radius:999px;background:linear-gradient(90deg,var(--neon-4),#8effd3);color:#05231a;font-weight:800;font-size:13px;
-      box-shadow:0 8px 28px rgba(0,255,149,0.08);
-    }
-
-    @media (max-width:880px){
-      .neon-card{flex-direction:column;align-items:stretch;padding:22px;gap:18px}
-      .middle{width:100%;max-width:none}
-      .big-pass{font-size:28px}
-    }
-
-    .btn:focus, .btn-ghost:focus { outline:2px solid rgba(255,255,255,0.06); outline-offset:4px; }
-
-    /* ---------- COPYRIGHT ---------- */
-    .mini-copyright{
-      position:fixed;
-      bottom:10px;
-      left:50%;
-      transform:translateX(-50%);
-      display:inline-flex;
-      gap:10px;
-      font-weight:700;
-      font-size:14px;
-      letter-spacing:0.6px;
-      z-index:3;
-    }
-    .mini-copyright .years{
-      color:#ffffff;
-      opacity:0.9;
-    }
-    .mini-copyright .luck{
-      color:#ff1f4b;
-      text-shadow:
-        0 0 6px rgba(255,31,75,0.9),
-        0 0 18px rgba(255,31,75,0.6),
-        0 6px 24px rgba(255,31,75,0.12);
-      animation: neonPulse 2.4s infinite ease-in-out;
-    }
-    @keyframes neonPulse {
-      0%   { filter: brightness(1); }
-      50%  { filter: brightness(1.2); }
-      100% { filter: brightness(1); }
-    }
-  </style>
-</head>
-<body>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
-
-  <div class="center-wrap" role="main">
-    <div class="neon-card" role="region" aria-label="Panel principal">
-      <div style="flex:1; min-width:180px; padding-right:8px;"></div>
-
-      <!-- Middle / box centrado -->
-      <div class="middle" aria-live="polite">
-        <div class="big-label" style="opacity:0.85">Contraseña</div>
-        <div class="big-pass" id="bigPass">AIMKILL01</div>
-
-        <div class="neon-underline" aria-hidden="true"></div>
-
-        <div class="controls" role="group" aria-label="Controles de contraseña">
-          <button class="btn" id="copyBtn" data-pass="AIMKILL01" title="Copiar AIMKILL01">📋 Copiar</button>
-          <button class="btn-ghost" id="revealBtn" title="Ocultar/Mostrar contraseña">🔒 Ocultar</button>
-          <button class="btn-ghost" id="downloadBtn" title="Descargar ejemplo">⬇️ Descargar ejemplo</button>
-        </div>
-
-        <div style="margin-top:8px">
-          <span id="status" class="copied-badge" style="display:none">Copiado</span>
-          <span id="statusFallback" style="color:rgba(231,240,255,0.8);font-size:13px">Estado: listo</span>
-        </div>
-      </div>
-
-      <div style="flex:1; min-width:180px; padding-left:8px;"></div>
-    </div>
-  </div>
-
-  <!-- COPYRIGHT -->
-  <div class="mini-copyright">
-    <span class="years">(2024 - 2025)</span>
-    <span class="luck">(LUCK X!T)</span>
-  </div>
-
-  <script>
-    async function copyText(text) {
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(text);
-          return true;
-        } else {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.position = 'fixed';
-          ta.style.left = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
-          const ok = document.execCommand('copy');
-          ta.remove();
-          return ok;
-        }
-      } catch (err) {
-        console.error('copy failed', err);
-        return false;
-      }
-    }
-
-    function showCopied() {
-      const badge = document.getElementById('status');
-      const fallback = document.getElementById('statusFallback');
-      badge.style.display = 'inline-block';
-      fallback.style.display = 'none';
-      setTimeout(()=> {
-        badge.style.display = 'none';
-        fallback.style.display = 'inline';
-      }, 1600);
-    }
-
-    function showError(msg) {
-      const fallback = document.getElementById('statusFallback');
-      fallback.textContent = 'Error: ' + msg;
-      setTimeout(()=> { fallback.textContent = 'Estado: listo'; }, 1800);
-    }
-
-    const copyBtn = document.getElementById('copyBtn');
-    const revealBtn = document.getElementById('revealBtn');
-    const bigPass = document.getElementById('bigPass');
-    const downloadBtn = document.getElementById('downloadBtn');
-
-    copyBtn.addEventListener('click', async function() {
-      const text = this.getAttribute('data-pass') || bigPass.textContent;
-      const ok = await copyText(text);
-      if (ok) {
-        showCopied();
-      } else {
-        showError('No se pudo copiar');
-      }
-    });
-
-    let revealed = true;
-    revealBtn.addEventListener('click', () => {
-      revealed = !revealed;
-      if (revealed) {
-        bigPass.textContent = 'AIMKILL01';
-        revealBtn.textContent = '🔒 Ocultar';
-      } else {
-        bigPass.textContent = '********';
-        revealBtn.textContent = '👁 Mostrar';
-      }
-    });
-
-    downloadBtn.addEventListener('click', () => {
-      const content = 'Archivo de ejemplo\\nContraseña: AIMKILL01\\n\\nContenido demo protegido.';
-      const blob = new Blob([content], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'ejemplo_AIMKILL01.txt';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
-        e.preventDefault();
-        copyBtn.click();
-      }
-    });
-  </script>
-</body>
+    // Al hacer click, abrir en nueva pestaña (seguro)
+    downloadBtn.addEventListener('click', (e) => {  
+      window.open(mediafireLink, '_blank', 'noopener,noreferrer');  
+    });  
+  
+    document.addEventListener('keydown', (e) => {  
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {  
+        e.preventDefault();  
+        copyBtn.click();  
+      }  
+    });  
+  </script>  
+</body>  
 </html>
