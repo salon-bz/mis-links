@@ -1,258 +1,193 @@
-<!DOCTYPE html><html lang="es"><head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>PARA DESCOMPRIMIR EL PANEL ZIP | CLAVE RECIBIDA</title>  
-  <style>  
-    :root {  
-      --primary: #FF4D4D;  
-      --secondary: #FF9E4D;  
-      --accent: #FFEB3B;  
-      --dark: #0a0a1a;  
-      --light: #F8F9FA;  
-      --success: #4CAF50;  
-      --neon-red: #ff1a1a;  
-      --neon-glow: 0 0 5px, 0 0 10px, 0 0 20px;  
-    }  
-    * {margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}  
-    body {
-  background: radial-gradient(circle at center, #0f0f2f, #000);
-  min-height: 100vh;
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descargar Mod — Panel RGB</title>
+  <style>
+    :root {
+      --bg1: 0, 255, 255;
+      --bg2: 255, 0, 255;
+      --accent: 255, 255, 255;
+      --radius: 18px;
+      --gap: 14px;
+      --max-card-width: 420px;
+    }* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: radial-gradient(circle at top left, rgba(var(--bg1), 0.3), transparent),
+              radial-gradient(circle at bottom right, rgba(var(--bg2), 0.3), transparent),
+              #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+canvas#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.card-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-card-width);
   display: flex;
   justify-content: center;
-  align-items: center; /* 👈 agrega esto */
-  padding: 20px;
-  color: var(--light);
-  overflow-x: hidden;
-  overflow-y: auto;
 }
-    canvas#particles {  
-      position: fixed;  
-      top: 0;left: 0;  
-      width: 100%;height: 100%;  
-      z-index: -1;  
-    }  
-    .key-container {  
-      background: rgba(26,26,46,0.85);  
-      width:95%;max-width:400px;  
-      padding:2.5rem;  
-      border-radius:40px;  
-      box-shadow:0 0 40px rgba(255,255,255,0.15);  
-      text-align:center;  
-      border:1px solid rgba(255,255,255,0.1);  
-      backdrop-filter:blur(15px);  
-      animation: neon-glow 2s infinite alternate;  
-    }  
-    @keyframes neon-glow {  
-      from {box-shadow: 0 0 15px rgba(255,0,100,0.5);}  
-      to {box-shadow: 0 0 35px rgba(255,0,100,1);}  
-    }  
-    .key-header {margin-bottom:2rem;}  
-    .key-icon {  
-      width:80px;height:80px;margin:0 auto 1rem;  
-      background: linear-gradient(45deg, var(--primary), var(--secondary));  
-      border-radius:50%;  
-      display:flex;align-items:center;justify-content:center;  
-      box-shadow:0 0 25px #ff4d4d, 0 0 50px #ff9e4d;  
-      animation: pulse 2s infinite;  
-    }  
-    @keyframes pulse {  
-      0% {transform:scale(1);}  
-      50% {transform:scale(1.1);}  
-      100% {transform:scale(1);}  
-    }  
-    .key-icon span {font-size:2.5rem;color:white;}  
-    h1 {  
-      color:var(--accent);  
-      margin-bottom:1rem;  
-      font-size:2rem;font-weight:700;  
-      text-transform:uppercase;  
-      letter-spacing:3px;  
-      text-shadow:0 0 10px var(--accent),0 0 20px var(--accent);  
-    }  
-    .key-status {  
-      padding:1rem;margin:1.5rem 0;border-radius:10px;  
-      background:rgba(0,0,0,0.3);  
-      border-left:4px solid var(--success);  
-      box-shadow:inset 0 0 15px rgba(0,255,0,0.4);  
-    }  
-    .key-details {  
-      text-align:left;margin:2rem 0;padding:1.5rem;  
-      background:rgba(0,0,0,0.2);  
-      border-radius:10px;  
-      border:1px solid rgba(255,255,255,0.1);  
-      box-shadow:inset 0 0 15px rgba(255,255,255,0.1);  
-    }  
-    .key-row {  
-      display:flex;margin-bottom:1rem;padding-bottom:1rem;  
-      border-bottom:1px dashed rgba(255,255,255,0.1);align-items:center;  
-    }  
-    .key-row:last-child {border-bottom:none;margin-bottom:0;padding-bottom:0;}  
-    .key-label {flex:1;color:var(--secondary);font-weight:600;text-transform:uppercase;font-size:0.9rem;letter-spacing:1px;}  
-    .key-value {flex:2;text-align:right;font-weight:400;}  
-    .key-code {  
-      font-size:1.5rem;font-family:'Courier New',monospace;  
-      background:rgba(0,0,0,0.6);  
-      padding:0.8rem 1.5rem;  
-      border-radius:8px;color:var(--accent);  
-      letter-spacing:2px;display:inline-block;margin:0.5rem 0;  
-      border:1px solid rgba(255,235,59,0.6);  
-      text-shadow:0 0 10px var(--accent),0 0 20px var(--accent);  
-    }  
-    .key-warning {  
-      margin-top:2rem;padding:1rem;  
-      background:rgba(255,77,77,0.1);  
-      border-radius:8px;  
-      border-left:4px solid var(--primary);  
-      font-size:0.9rem;color:rgba(255,200,200,0.9);  
-      text-shadow:0 0 8px rgba(255,77,77,0.7);  
-    }  
-    .btn-copy, .btn-download {  
-      display:inline-block;background:rgba(255,235,59,0.05);  
-      color:var(--accent);  
-      padding:0.8rem 1.5rem;  
-      border-radius:50px;  
-      text-decoration:none;font-weight:600;  
-      margin-top:1rem;  
-      border:1px solid rgba(255,235,59,0.3);  
-      cursor:pointer;transition:all 0.3s ease;  
-      box-shadow:0 0 10px rgba(255,235,59,0.5);  
-    }  
-    .btn-copy:hover, .btn-download:hover {  
-      background:rgba(255,235,59,0.2);  
-      transform:translateY(-2px);  
-      box-shadow:0 0 20px rgba(255,235,59,1);  
-    }  
-    .key-footer {  
-      margin-top:2rem;  
-      font-size:0.8rem;  
-      color:rgba(255,255,255,0.5);  
-    }  
-    .key-footer span {  
-      color: var(--neon-red);  
-      text-shadow: 0 0 5px var(--neon-red),  
-                   0 0 10px var(--neon-red),  
-                   0 0 20px var(--neon-red);  
-      font-weight: bold;  
-    }  
 
-    /* 📱 Ajustes móviles */
-    @media (max-width: 480px) {
-      h1 {font-size:1.5rem;}
-      .key-code {font-size:1.2rem;padding:0.6rem 1rem;}
-      .btn-copy, .btn-download {padding:0.6rem 1rem;font-size:0.9rem;}
-      .key-container {padding:1.5rem;}
+.card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: rgb-glow 6s linear infinite;
+}
+
+@keyframes rgb-glow {
+  0% { box-shadow: 0 0 25px rgba(255, 0, 255, 0.4); }
+  33% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }
+  66% { box-shadow: 0 0 25px rgba(255, 255, 0, 0.4); }
+  100% { box-shadow: 0 0 25px rgba(255, 0, 255, 0.4); }
+}
+
+.image-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(var(--bg1), 0.2), rgba(var(--bg2), 0.2));
+}
+
+.image-box img {
+  max-width: 85%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.image-box img:hover {
+  transform: scale(1.05);
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+a.btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(90deg, rgba(var(--bg1), 0.6), rgba(var(--bg2), 0.6));
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+a.btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.3);
+}
+
+.meta {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <main class="card-wrap">
+    <section class="card">
+      <h1>Descargar Mod</h1>
+      <div class="image-box">
+        <img src="https://i.postimg.cc/y8VWhHB3/Polish-20251004-125908420.jpg" alt="Preview del mod" />
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://www.mediafire.com/file/9eanqpntkvw4nkr/%25F0%259D%2590%258B%25F0%259D%2590%2594%25F0%259D%2590%2582%25F0%259D%2590%258A_%25F0%259D%2590%2597%2521%25F0%259D%2590%2593_%25F0%259D%2590%2587%25F0%259D%2590%2586.zip/file" target="_blank">Descargar mod</a>
+        <a class="btn" href="https://chat.whatsapp.com/EBP8sfNIKvIEoelECMrmst?mode=ems_copy_t" target="_blank">Unirse por WhatsApp</a>
+      </div>
+      <p class="meta">2024 - 2025 𝐋𝐔𝐂𝐊 𝐗!𝐓</p>
+    </section>
+  </main>  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  </style>  
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"><style></style></head>  
-<body>  
-  <canvas id="particles" width="600" height="1098"></canvas>  
-  <div class="key-container">  
-    <div class="key-header">  
-      <div class="key-icon"><span>⚠️</span></div>  
-      <h1>INFO DE EL ARCHIVO</h1>  
-      <div class="key-status">  
-        ✅ Clave válida - Lista para usar  
-      </div>  
-    </div>  
-    <div class="key-details">  
-      <div class="key-row">  
-        <div class="key-label">Función</div>  
-        <div class="key-value">Descomprimir .ZIP</div>  
-      </div>  
-      <div class="key-row">  
-        <div class="key-label">Creador</div>  
-        <div class="key-value"><span style="color:var(--neon-red);text-shadow:0 0 10px red,0 0 20px red;">Luck X!T</span></div>  
-      </div>  
-      <div class="key-row">  
-        <div class="key-label">Estado</div>  
-        <div class="key-value">Para jugar en black list</div>  
-      </div>  
-    </div>  
-    <div>  
-      <div style="margin:1.5rem 0;">TU CLAVE:</div>  
-      <div class="key-code" id="keyCode">AIMKILL01</div>  
-      <button class="btn-copy" onclick="copyKey()">📋 COPIAR CLAVE</button>  
-      <a href="https://www.mediafire.com/file/ydqjb2nkm6hm2tu/MOD_AIMKILL_BY%25C2%25A9%25EF%25B8%258FCHICO_H4X.zip/file" target="_blank" class="btn-download">⬇️ DESCARGAR-MOD</a>  
-    </div>  
-    <div class="key-warning">  
-      ⚠️ Nota: Actualmente este panel te estará dando black list, juega en black list o úsalo bajo tu propia responsabilidad.  
-    </div>  
-    <div class="key-footer">  
-      Copyright © 2024 - 2025 (<span>LUCK X!T</span>)  
-    </div>  
-  </div>  
-  
-  <script>  
-    // Clave enviada desde el panel  
-    const adminKey = "AIMKILL01";  
-    document.getElementById("keyCode").innerText = adminKey;  
-  
-    function copyKey() {  
-      const keyElement = document.getElementById('keyCode');  
-      navigator.clipboard.writeText(keyElement.innerText);  
-      const btn = document.querySelector('.btn-copy');  
-      btn.innerText = "✅ COPIADO";  
-      btn.style.background = 'rgba(76, 175, 80, 0.2)';  
-      btn.style.color = '#4CAF50';  
-      setTimeout(() => {  
-        btn.innerText = "📋 COPIAR CLAVE";  
-        btn.style.background = 'rgba(255, 235, 59, 0.05)';  
-        btn.style.color = 'var(--accent)';  
-      }, 2000);  
-    }  
-  
-    // Partículas brillantes  
-    const canvas = document.getElementById('particles');  
-    const ctx = canvas.getContext('2d');  
-    let particles = [];  
-    canvas.width = window.innerWidth;  
-    canvas.height = window.innerHeight;  
-  
-    class Particle {  
-      constructor() {  
-        this.x = Math.random() * canvas.width;  
-        this.y = Math.random() * canvas.height;  
-        this.size = Math.random() * 2 + 1;  
-        this.speedX = (Math.random() - 0.5) * 0.5;  
-        this.speedY = (Math.random() - 0.5) * 0.5;  
-      }  
-      update() {  
-        this.x += this.speedX;  
-        this.y += this.speedY;  
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;  
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;  
-      }  
-      draw() {  
-        ctx.beginPath();  
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);  
-        ctx.fillStyle = `hsl(${Math.random()*360},100%,70%)`;  
-        ctx.shadowColor = ctx.fillStyle;  
-        ctx.shadowBlur = 15;  
-        ctx.fill();  
-      }  
-    }  
-  
-    function initParticles() {  
-      particles = [];  
-      for (let i = 0; i < 100; i++) {  
-        particles.push(new Particle());  
-      }  
-    }  
-  
-    function animate() {  
-      ctx.clearRect(0,0,canvas.width,canvas.height);  
-      particles.forEach(p => {p.update();p.draw();});  
-      requestAnimationFrame(animate);  
-    }  
-  
-    initParticles();  
-    animate();  
-  
-    window.addEventListener("resize", () => {  
-      canvas.width = window.innerWidth;  
-      canvas.height = window.innerHeight;  
-      initParticles();  
-    });  
-  </script>  
-  
-</body></html>
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 120; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+  </script></body>
+</html>
