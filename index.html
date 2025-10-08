@@ -5,118 +5,137 @@
   <title>MOD MENU SIN METODO</title>
   <style>
     :root {
-      --bg1: 0, 255, 255;
-      --bg2: 255, 0, 255;
-      --accent: 255, 255, 255;
+      --bg1: 0, 255, 180;
+      --bg2: 255, 0, 150;
+      --accent: 0, 255, 255;
       --radius: 18px;
       --gap: 14px;
       --max-card-width: 420px;
-    }* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-body {
-  background: radial-gradient(circle at top left, rgba(var(--bg1), 0.3), transparent),
-              radial-gradient(circle at bottom right, rgba(var(--bg2), 0.3), transparent),
-              #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-}
+    }
 
-canvas#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
 
-.card-wrap {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--max-card-width);
-  display: flex;
-  justify-content: center;
-}
+    body {
+      background: radial-gradient(circle at top left, rgba(var(--bg1), 0.15), transparent),
+                  radial-gradient(circle at bottom right, rgba(var(--bg2), 0.15), transparent),
+                  linear-gradient(135deg, #000010 0%, #050014 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: #00ffee;
+      text-shadow: 0 0 6px rgba(0,255,255,0.7);
+    }
 
-.card {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: rgb-glow 6s linear infinite;
-}
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
 
-@keyframes rgb-glow {
-  0% { box-shadow: 0 0 25px rgba(255, 0, 255, 0.4); }
-  33% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }
-  66% { box-shadow: 0 0 25px rgba(255, 255, 0, 0.4); }
-  100% { box-shadow: 0 0 25px rgba(255, 0, 255, 0.4); }
-}
+    .card-wrap {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-card-width);
+      display: flex;
+      justify-content: center;
+    }
 
-.image-box {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-  padding: 12px;
-  background: linear-gradient(135deg, rgba(var(--bg1), 0.2), rgba(var(--bg2), 0.2));
-}
+    .card {
+      width: 100%;
+      background: rgba(10, 10, 20, 0.6);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: rgb-glow 6s linear infinite;
+    }
 
-.image-box img {
-  max-width: 85%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  transition: transform 0.4s ease;
-}
+    @keyframes rgb-glow {
+      0% { box-shadow: 0 0 30px rgba(0,255,255,0.5); border-color: rgba(0,255,255,0.6); }
+      33% { box-shadow: 0 0 30px rgba(255,0,255,0.5); border-color: rgba(255,0,255,0.6); }
+      66% { box-shadow: 0 0 30px rgba(255,255,0,0.5); border-color: rgba(255,255,0,0.6); }
+      100% { box-shadow: 0 0 30px rgba(0,255,255,0.5); border-color: rgba(0,255,255,0.6); }
+    }
 
-.image-box img:hover {
-  transform: scale(1.05);
-}
+    h1 {
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffff, 0 0 16px #ff00ff;
+      letter-spacing: 1px;
+      text-align: center;
+    }
 
-.actions {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 14px;
-}
+    .image-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, rgba(var(--bg1), 0.2), rgba(var(--bg2), 0.2));
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+    }
 
-a.btn {
-  display: block;
-  text-align: center;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  color: white;
-  background: linear-gradient(90deg, rgba(var(--bg1), 0.6), rgba(var(--bg2), 0.6));
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
+    .image-box img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
 
-a.btn:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.3);
-}
+    .image-box img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 35px rgba(255,0,255,0.6);
+    }
 
-.meta {
-  margin-top: 8px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-}
+    .actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 18px;
+    }
 
+    a.btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 1px;
+      color: #fff;
+      background: linear-gradient(90deg, rgba(var(--bg1), 0.7), rgba(var(--bg2), 0.7));
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    a.btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      filter: brightness(1.4);
+      box-shadow: 0 0 35px rgba(255, 0, 255, 0.5);
+    }
+
+    .meta {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(0, 255, 255, 0.6);
+      text-align: center;
+      text-shadow: 0 0 6px rgba(0,255,255,0.5);
+    }
   </style>
 </head>
 <body>
@@ -133,7 +152,8 @@ a.btn:hover {
       </div>
       <p class="meta">2024 - 2025 𝐋𝐔𝐂𝐊 𝐗!𝐓</p>
     </section>
-  </main>  <script>
+  </main>
+  <script>
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -153,7 +173,7 @@ a.btn:hover {
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1 - 0.5;
         this.speedY = Math.random() * 1 - 0.5;
-        this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
       }
       update() {
         this.x += this.speedX;
@@ -165,7 +185,7 @@ a.btn:hover {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 12;
         ctx.shadowColor = this.color;
         ctx.fill();
       }
@@ -189,5 +209,6 @@ a.btn:hover {
 
     initParticles();
     animate();
-  </script></body>
+  </script>
+</body>
 </html>
